@@ -189,7 +189,7 @@ arma::mat bilinear_smoother(const arma::mat& m,
     return res;
 }
 
-void PyInit_bayes_smoothing(py::module &m) {
+void PyInit_smoothing(py::module &m) {
     m.def("bayes_smoother", &bayes_smoother, "Bayes Smoother");
 
     m.def("kernel_smoother", &kernel_smoother, "Kernel Smoother");

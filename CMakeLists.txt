@@ -11,7 +11,7 @@ endif()
 set(CMAKE_CXX_FLAGS "-O3")
 set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 
-project(bayes_smoothing)
+project(smoothing)
 
 include_directories(/usr/local/include)
 include_directories("${CMAKE_SOURCE_DIR}/python")
@@ -28,14 +28,14 @@ find_library(ARMADILLO_LIB armadillo HINTS /usr/local/lib/ REQUIRED)
 
 # Pybind11
 find_package(pybind11 REQUIRED)
-pybind11_add_module(bayes_smoothing 
+pybind11_add_module(smoothing 
 	${SOURCE_FILES}
 	${PYTHON_FILES}
 )
 
-target_link_libraries(bayes_smoothing PUBLIC ${ARMADILLO_LIB})
+target_link_libraries(smoothing PUBLIC ${ARMADILLO_LIB})
 
-install(TARGETS bayes_smoothing
+install(TARGETS smoothing
   COMPONENT python
   LIBRARY DESTINATION "${PYTHON_LIBRARY_DIR}"
 )

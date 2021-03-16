@@ -2,11 +2,11 @@
 
 namespace py = pybind11;
 
-void PyInit_bayes_smoothing(py::module &);
+void PyInit_smoothing(py::module &);
 
-PYBIND11_MODULE(bayes_smoothing, m) {
+PYBIND11_MODULE(smoothing, m) {
     // Optional docstring
     m.doc() = "Spatial Smoothing Functions";
     
-    PyInit_bayes_smoothing(m);
+    PyInit_smoothing(m);
 }
