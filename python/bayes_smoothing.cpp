@@ -6,7 +6,7 @@ void PyInit_bayes_smoothing(py::module &);
 
 PYBIND11_MODULE(bayes_smoothing, m) {
     // Optional docstring
-    m.doc() = "Bayes Smoothing";
+    m.doc() = "Spatial Smoothing Functions";
     
     PyInit_bayes_smoothing(m);
 }

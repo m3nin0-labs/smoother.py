@@ -60,7 +60,6 @@ arma::colvec nm_post_mean_x(const arma::colvec& x,
     return sigma * inv_sum_weights * mu0 + sigma0 * inv_sum_weights * x;
 }
 
-// [[Rcpp::export]]
 arma::mat bayes_smoother(const arma::mat& m,
                          const arma::uword m_nrow,
                          const arma::uword m_ncol,
@@ -115,7 +114,6 @@ arma::mat bayes_smoother(const arma::mat& m,
     return res;
 }
 
-// [[Rcpp::export]]
 arma::mat kernel_smoother(const arma::mat& m,
                           const arma::uword m_nrow,
                           const arma::uword m_ncol,
@@ -152,7 +150,6 @@ arma::mat kernel_smoother(const arma::mat& m,
     return res;
 }
 
-// [[Rcpp::export]]
 arma::mat bilinear_smoother(const arma::mat& m,
                             const arma::uword m_nrow,
                             const arma::uword m_ncol,
@@ -192,7 +189,10 @@ arma::mat bilinear_smoother(const arma::mat& m,
     return res;
 }
 
-
 void PyInit_bayes_smoothing(py::module &m) {
     m.def("bayes_smoother", &bayes_smoother, "Bayes Smoother");
+
+    m.def("kernel_smoother", &kernel_smoother, "Kernel Smoother");
+
+    m.def("bilinear_smoother", &bilinear_smoother, "Bilinear Smoother");
 }
