@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "smoother-py"
+version = "0.1.0"
+description = ""
+authors = ["Felipe Carlos <efelipecarlos@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+packages = [{include = "smoother"}]
+
+[project]
+name = "smoother-py"
+version = "0.1.0"
+requires-python = ">=3.11"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+pybind11 = "^2.12.0"
+numpy = "^1.26.4"
+
+[tool.poetry.group.dev.dependencies]
+scikit-build-core = "^0.9.4"
+
+[build-system]
+requires = ["scikit-build-core", "pybind11"]
+build-backend = "scikit_build_core.build"

@@ -1,13 +1,11 @@
 #include <armadillo>
+#include <carma/carma.h>
 
-// pybind11
 #include <pybind11/numpy.h>
 #include <pybind11/stl.h>
 #include <pybind11/pybind11.h>
-namespace py = pybind11;
 
-// Carma
-#include <carma/carma.h>
+namespace py = pybind11;
 
 struct _neigh {
     arma::mat data;
@@ -20,7 +18,6 @@ struct _neigh {
 };
 
 typedef _neigh neigh_t;
-
 void neigh_vec(neigh_t& n,
                const arma::mat& m,
                const arma::uword m_nrow,
@@ -60,7 +57,7 @@ arma::colvec nm_post_mean_x(const arma::colvec& x,
     return sigma * inv_sum_weights * mu0 + sigma0 * inv_sum_weights * x;
 }
 
-arma::mat bayes_smoother(const arma::mat& m,
+arma::mat bayes_smooth(const arma::mat& m,
                          const arma::uword m_nrow,
                          const arma::uword m_ncol,
                          const arma::mat& w,
@@ -114,7 +111,7 @@ arma::mat bayes_smoother(const arma::mat& m,
     return res;
 }
 
-arma::mat kernel_smoother(const arma::mat& m,
+arma::mat kernel_smooth(const arma::mat& m,
                           const arma::uword m_nrow,
                           const arma::uword m_ncol,
                           const arma::mat& w,
@@ -150,7 +147,7 @@ arma::mat kernel_smoother(const arma::mat& m,
     return res;
 }
 
-arma::mat bilinear_smoother(const arma::mat& m,
+arma::mat bilinear_smooth(const arma::mat& m,
                             const arma::uword m_nrow,
                             const arma::uword m_ncol,
                             const arma::mat& w,
@@ -189,10 +186,11 @@ arma::mat bilinear_smoother(const arma::mat& m,
     return res;
 }
 
-void PyInit_smoothing(py::module &m) {
-    m.def("bayes_smoother", &bayes_smoother, "Bayes Smoother");
-
-    m.def("kernel_smoother", &kernel_smoother, "Kernel Smoother");
-
-    m.def("bilinear_smoother", &bilinear_smoother, "Bilinear Smoother");
+PYBIND11_MODULE(_smoother, m) {
+    // Optional docstring
+    m.doc() = "(Internal) Spatial Smoothing Functions";
+    
+    m.def("bayes", &bayes_smooth, "Bayes Smooth");
+    m.def("kernel", &kernel_smooth, "Kernel Smooth");
+    m.def("bilinear", &bilinear_smooth, "Bilinear Smoother");
 }

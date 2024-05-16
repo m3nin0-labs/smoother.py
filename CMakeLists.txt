@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.1)
+cmake_minimum_required(VERSION 3.15...3.26)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -11,31 +11,25 @@ endif()
 set(CMAKE_CXX_FLAGS "-O3")
 set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 
-project(smoothing)
+project(_smoother)
 
-include_directories(/usr/local/include)
-include_directories("${CMAKE_SOURCE_DIR}/python")
-include_directories("${CMAKE_SOURCE_DIR}/python/carma")
+# C++ files
+include_directories("${CMAKE_SOURCE_DIR}/src")
 
-file (GLOB SOURCE_FILES "cpp/src/*.cpp")
-file (GLOB PYTHON_FILES "python/*.cpp" "python/*.hpp" "python/carma/*.h" "python/carma/carma/*.h")
+file (GLOB SOURCE_FILES "src/*.cpp")
+file (GLOB HEADER_FILES "src/carma/*.h" "src/carma/carma/*.h")
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${SOURCE_FILES} ${HEADER_FILES} )
 
-# Set up such that XCode organizes the files
-source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${SOURCE_FILES} ${HEADER_FILES} ${PYTHON_FILES} )
+# Python
+find_package(Python COMPONENTS Interpreter Development.Module REQUIRED)
+
+# Pybind11
+find_package(pybind11 CONFIG REQUIRED)
+pybind11_add_module(_smoother ${SOURCE_FILES})
 
 # Armadillo
 find_library(ARMADILLO_LIB armadillo HINTS /usr/local/lib/ REQUIRED)
+target_link_libraries(_smoother PUBLIC ${ARMADILLO_LIB})
 
-# Pybind11
-find_package(pybind11 REQUIRED)
-pybind11_add_module(smoothing 
-	${SOURCE_FILES}
-	${PYTHON_FILES}
-)
-
-target_link_libraries(smoothing PUBLIC ${ARMADILLO_LIB})
-
-install(TARGETS smoothing
-  COMPONENT python
-  LIBRARY DESTINATION "${PYTHON_LIBRARY_DIR}"
-)
+target_compile_definitions(_smoother PRIVATE VERSION_INFO=${PROJECT_VERSION})
+install(TARGETS _smoother LIBRARY DESTINATION .)
