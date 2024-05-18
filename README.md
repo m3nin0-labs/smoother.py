@@ -1,11 +1,45 @@
-## smoother.py - Spatial Smoothing in Python
+## smoother.py
 
-This Python import library makes it possible to use the spatial smoothing functions implemented by Rolf Simoes in the [SITS package](https://github.com/e-sensing/sits).
+`smoother.py` is a Python package designed to provide spatial smoothing methods for probability maps, inspired by the [sits](https://github.com/e-sensing/sits) R package.
 
-The original functions are all written in C++, using the package [armadillo](http://arma.sourceforge.net/). Then, through [carma](https://carma.readthedocs.io/), they were imported into Python and are available in this library.
+## Features
 
-Avaliable functions:
+- **Bayesian Smoothing**: Implements the [Bayes smoothing method](https://e-sensing.github.io/sitsbook/bayesian-smoothing-for-post-processing.html) using the C++ functions from the [sits](https://github.com/e-sensing/sits) R package.
 
-- `bayes_smoother`
-- `kernel_smoother`
-- `bilinear_smoother`
+## Installation
+
+To install the package, use pip:
+
+```bash
+pip install git+https://github.com/m3nin0-labs/smoother.py
+```
+
+### Requirements
+
+To install the package, it is required to have [Armadillo](https://arma.sourceforge.net/) installed. 
+
+## Usage
+
+The `smoother.py` package is designed for simplicity. It is simple to get started with it. Here's a quick example:
+
+```python
+import smoother
+
+smoothed_data = smoother.bayes(your_numpy_array)
+```
+
+## Learn more
+
+The smoothing methods implemented in this package uses the approach described in the [sits documentation](https://e-sensing.github.io/sitsbook/bayesian-smoothing-for-post-processing.html). This method helps in refining the probability maps by considering the spatial context of each pixel.
+
+## Acknowledgments
+
+We would like to thank the developers and contributors of the `sits` R package for their work on spatial smoothing methods for Earth observation data. Their comprehensive [documentation](https://e-sensing.github.io/sitsbook/) and methodologies have been invaluable in the development of `smoother.py`.
+
+## Contributing
+
+We welcome contributions! If you have suggestions for improvements or bug fixes, please feel free to fork the repository and submit a pull request.
+
+## License
+
+`smoother.py` is distributed under the MIT license. See LICENSE for more details.
