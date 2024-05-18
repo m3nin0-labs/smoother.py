@@ -19,6 +19,24 @@ numpy = "^1.26.4"
 
 [tool.poetry.group.dev.dependencies]
 scikit-build-core = "^0.9.4"
+ruff = "^0.1.13"
+pytest = "^7.4.4"
+pre-commit = "^3.6.0"
+
+[tool.isort]
+profile = "black"
+line_length = 88
+skip_glob = [ "docs", "notes" ]
+
+[tool.ruff]
+select = [
+  "E",   # pycodestyle
+  "F",   # pyflakes
+  "UP",  # pyupgrade
+  "I",   # isort
+  "N",   # pep8 naming
+  "PL",  # pylint
+]
 
 [build-system]
 requires = ["scikit-build-core", "pybind11"]
