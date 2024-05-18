@@ -1,22 +1,18 @@
-## smoother.py
+## smoother.py 🧹
 
-`smoother.py` is a Python package designed to provide spatial smoothing methods for probability maps, inspired by the [sits](https://github.com/e-sensing/sits) R package.
+Python package providing spatial smoothing methods for probability maps.
 
 ## Features
 
-- **Bayesian Smoothing**: Implements the [Bayes smoothing method](https://e-sensing.github.io/sitsbook/bayesian-smoothing-for-post-processing.html) using the C++ functions from the [sits](https://github.com/e-sensing/sits) R package.
+**Bayesian Smoothing**: [Bayes smoothing method](https://e-sensing.github.io/sitsbook/bayesian-smoothing-for-post-processing.html) using the C++ functions from the [sits](https://github.com/e-sensing/sits) R package.
 
 ## Installation
 
-To install the package, use pip:
+To install the package, you must have [Armadillo](https://arma.sourceforge.net/) installed, then you can use pip:
 
 ```bash
 pip install git+https://github.com/m3nin0-labs/smoother.py
 ```
-
-### Requirements
-
-To install the package, it is required to have [Armadillo](https://arma.sourceforge.net/) installed. 
 
 ## Usage
 
